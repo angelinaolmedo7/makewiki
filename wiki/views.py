@@ -15,7 +15,8 @@ class PageList(ListView):
 
     def get(self, request):
         """ Returns a list of wiki pages. """
-        pass
+        pages = self.get_queryset().all()
+        return render(request, 'list.html', {'pages': pages})
 
 
 class PageDetailView(DetailView):
@@ -39,7 +40,8 @@ class PageDetailView(DetailView):
 
     def get(self, request, slug):
         """ Returns a specific of wiki page by slug. """
-        pass
+        page = self.get_queryset().get(slug__iexact=slug)
+        return render(request, 'page.html', {'page': page})
 
     def post(self, request, slug):
         pass
